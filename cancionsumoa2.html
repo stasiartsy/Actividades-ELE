@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Interactiva: El Cieguito Volador</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #7f8c8d;
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .reading-section {
+      background: #f8fafc;
+      border-left: 4px solid #3b82f6;
+    }
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #ecf0f1;
+      padding-bottom: 8px;
+      font-size: 1.2rem;
+    }
+    .verse {
+      line-height: 2.2;
+      font-size: 1.05rem;
+      margin-bottom: 15px;
+    }
+    .reading-verse {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #1e293b;
+      line-height: 1.8;
+    }
+    input[type="text"] {
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      width: 140px;
+      transition: all 0.3s ease;
+    }
+    input.correct {
+      background-color: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+    input.incorrect {
+      background-color: #f8d7da;
+      border-color: #dc3545;
+      color: #721c24;
+    }
+    .reorder-item {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 15px;
+    }
+    .reorder-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #475569;
+    }
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      min-height: 32px;
+    }
+    .word-btn {
+      background-color: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 15px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    .word-btn:hover {
+      background-color: #cbd5e1;
+    }
+    .drop-zone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 42px;
+      border: 2px dashed #94a3b8;
+      border-radius: 6px;
+      padding: 6px;
+      background-color: #ffffff;
+      align-items: center;
+      transition: border-color 0.3s;
+    }
+    .drop-zone.correct {
+      border-color: #28a745;
+      background-color: #f0fff4;
+    }
+    .drop-zone.incorrect {
+      border-color: #dc3545;
+      background-color: #fff5f5;
+    }
+    .btn-action {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-action:hover {
+      background-color: #2563eb;
+    }
+    #score {
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>El Cieguito Volador</h1>
+  <div class="subtitle">Canción de Sumo</div>
+
+  <!-- EJERCICIO 1 -->
+  <div class="section">
+    <h2>1) Completa con las palabras faltantes</h2>
+    <div class="verse">
+      Los murciélagos son <input type="text" data-ans="tétricos"><br>
+      Dan <input type="text" data-ans="miedo"> y <input type="text" data-ans="terror"><br>
+      Y nunca están <input type="text" data-ans="limpios">
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="section">
+    <h2>2) Completa con la forma correcta del verbo</h2>
+    <div class="verse">
+      Los murciélagos <input type="text" data-ans="se quedan"> <i>(quedarse)</i> abrigaditos<br>
+      En cuevas tristes<br>
+      Los murciélagos <input type="text" data-ans="tienen"> <i>(tener)</i> alas de cisne<br>
+      Y <input type="text" data-ans="se cuelgan"> <i>(colgarse)</i> hacia arriba<br>
+      <input type="text" data-ans="Viendo"> <i>(Ver, gerundio)</i> tu panza al revés<br><br>
+      Los murciélagos <input type="text" data-ans="vuelan"> <i>(volar)</i> sin problemas<br>
+      Los murciélagos <input type="text" data-ans="tienen"> <i>(tener)</i> radar
+    </div>
+  </div>
+
+  <!-- ESTROFA SOLO LECTURA -->
+  <div class="section reading-section">
+    <h2>Estrofa</h2>
+    <div class="reading-verse">
+      Yo estoy al derecho!<br>
+      Dado vuelta estás vos!
+    </div>
+  </div>
+
+  <!-- EJERCICIO 3 -->
+  <div class="section">
+    <h2>3) Reordena las palabras en las siguientes oraciones:</h2>
+    
+    <div id="reorder-container"></div>
+  </div>
+
+  <button class="btn-action" onclick="checkAnswers()">Comprobar Respuestas</button>
+  <button class="btn-action" style="background-color: #64748b;" onclick="resetForm()">Reiniciar Actividad</button>
+
+  <div id="score"></div>
+
+  <script>
+    // Oraciones objetivo para el Ejercicio 3
+    const sentences = [
+      "Los murciélagos lucen mejor cuando la noche es rara",
+      "A los murciélagos no les importa Batman!",
+      "Viendo tu panza al revés!"
+    ];
+
+    function initReorder() {
+      const container = document.getElementById('reorder-container');
+      container.innerHTML = '';
+
+      sentences.forEach((targetSentence, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'reorder-item';
+        itemDiv.setAttribute('data-target', targetSentence);
+
+        const label = document.createElement('div');
+        label.className = 'reorder-label';
+        label.textContent = `Oración ${index + 1}:`;
+
+        const bank = document.createElement('div');
+        bank.className = 'word-bank';
+
+        const zone = document.createElement('div');
+        zone.className = 'drop-zone';
+
+        // Dividir y desordenar palabras
+        let words = targetSentence.split(' ');
+        
+        // Se asegura de que no coincida con el orden correcto inicialmente
+        do {
+          words.sort(() => Math.random() - 0.5);
+        } while (words.join(' ') === targetSentence && words.length > 1);
+
+        words.forEach(word => {
+          const btn = document.createElement('span');
+          btn.className = 'word-btn';
+          btn.textContent = word;
+          btn.onclick = () => {
+            if (btn.parentElement === bank) {
+              zone.appendChild(btn);
+            } else {
+              bank.appendChild(btn);
+            }
+          };
+          bank.appendChild(btn);
+        });
+
+        itemDiv.appendChild(label);
+        itemDiv.appendChild(bank);
+        itemDiv.appendChild(zone);
+        container.appendChild(itemDiv);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+      let total = 0;
+
+      // Validar ejercicios 1 y 2
+      const inputs = document.querySelectorAll('input[type="text"]');
+      inputs.forEach(input => {
+        total++;
+        const expected = input.getAttribute('data-ans').trim().toLowerCase();
+        const userAns = input.value.trim().toLowerCase();
+
+        if (userAns === expected) {
+          input.className = 'correct';
+          correct++;
+        } else {
+          input.className = 'incorrect';
+        }
+      });
+
+      // Validar ejercicio 3 (Oraciones reordenadas)
+      const reorderItems = document.querySelectorAll('.reorder-item');
+      reorderItems.forEach(item => {
+        total++;
+        const target = item.getAttribute('data-target');
+        const dropZone = item.querySelector('.drop-zone');
+        const userSentence = Array.from(dropZone.children)
+          .map(btn => btn.textContent)
+          .join(' ');
+
+        if (userSentence.trim().toLowerCase() === target.trim().toLowerCase()) {
+          dropZone.className = 'drop-zone correct';
+          correct++;
+        } else {
+          dropZone.className = 'drop-zone incorrect';
+        }
+      });
+
+      // Mostrar puntuación
+      const scoreDiv = document.getElementById('score');
+      scoreDiv.textContent = `Puntaje final: ${correct} de ${total} aciertos.`;
+      scoreDiv.style.color = (correct === total) ? '#28a745' : '#dc3545';
+    }
+
+    function resetForm() {
+      document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.value = '';
+        input.className = '';
+      });
+      document.getElementById('score').textContent = '';
+      initReorder();
+    }
+
+    window.onload = initReorder;
+  </script>
+</body>
+</html>
