@@ -173,7 +173,7 @@
   <h1>El Cieguito Volador</h1>
   <div class="subtitle">Canción de Sumo</div>
 
-  <!-- 1) VIDEO EN LA PARTE SUPERIOR -->
+  <!-- VIDEO EN LA PARTE SUPERIOR -->
   <div class="video-container">
     <iframe src="https://www.youtube.com/embed/hE0wmlNxZkc?si=cOZvOQhSCAFCBXyQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
@@ -194,6 +194,7 @@
     <div class="verse">
       Los murciélagos <input type="text" data-ans="se quedan"> <i>(quedarse)</i> abrigaditos<br>
       En cuevas tristes<br>
+      Los murciélagos te hacen acordar a Béla Lugosi<br>
       Los murciélagos <input type="text" data-ans="tienen"> <i>(tener)</i> alas de cisne<br>
       Y <input type="text" data-ans="se cuelgan"> <i>(colgarse)</i> hacia arriba<br>
       <input type="text" data-ans="Viendo"> <i>(Ver, gerundio)</i> tu panza al revés<br><br>
@@ -209,7 +210,7 @@
     <div id="reorder-container"></div>
   </div>
 
-  <!-- 3) ESTROFA FINAL AL CIERRE DE LA ACTIVIDAD -->
+  <!-- ESTROFA FINAL AL CIERRE DE LA ACTIVIDAD -->
   <div class="section final-stanza">
     <h2>Estrofa final</h2>
     <div class="final-stanza-text">
@@ -224,7 +225,6 @@
   <div id="score"></div>
 
   <script>
-    // 2) Oración 3 actualizada exactamente a: "Revés al panza tu viendo!"
     const sentences = [
       "Los murciélagos lucen mejor cuando la noche es rara",
       "A los murciélagos no les importa Batman!",
@@ -250,10 +250,8 @@
         const zone = document.createElement('div');
         zone.className = 'drop-zone';
 
-        // Dividir y desordenar palabras
         let words = targetSentence.split(' ');
         
-        // Garantizar que aparezcan desordenadas inicialmente
         do {
           words.sort(() => Math.random() - 0.5);
         } while (words.join(' ') === targetSentence && words.length > 1);
@@ -298,7 +296,7 @@
         }
       });
 
-      // Validar ejercicio 3 (Oraciones reordenadas)
+      // Validar ejercicio 3
       const reorderItems = document.querySelectorAll('.reorder-item');
       reorderItems.forEach(item => {
         total++;
@@ -316,7 +314,6 @@
         }
       });
 
-      // Mostrar puntuación
       const scoreDiv = document.getElementById('score');
       scoreDiv.textContent = `Puntaje final: ${correct} de ${total} aciertos.`;
       scoreDiv.style.color = (correct === total) ? '#28a745' : '#dc3545';
