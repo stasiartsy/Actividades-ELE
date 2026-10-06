@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad Interactiva ELE - Nivel A1: Países e Idiomas</title>
+  <style>
+    :root {
+      --primary-color: #e11d48;
+      --primary-hover: #be123c;
+      --bg-color: #fff1f2;
+      --card-bg: #ffffff;
+      --text-color: #1f2937;
+      --border-color: #fecdd3;
+      --correct-color: #16a34a;
+      --incorrect-color: #dc2626;
+      --section-bg: #fff1f2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    h2 {
+      color: #9f1239;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-top: 35px;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      color: #881337;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .instructions {
+      color: #4b5563;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      background-color: #ffe4e6;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .example-box {
+      background-color: #f3f4f6;
+      border-left: 4px solid var(--primary-color);
+      padding: 8px 14px;
+      margin-bottom: 15px;
+      font-style: italic;
+      color: #374151;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .item-card {
+      background: #fafafa;
+      padding: 10px 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      padding: 6px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      flex-grow: 1;
+      min-width: 180px;
+    }
+
+    input[type="text"]:focus {
+      outline: 2px solid var(--primary-color);
+    }
+
+    .correct {
+      border: 2px solid var(--correct-color) !important;
+      background-color: #f0fdf4 !important;
+      color: #15803d !important;
+    }
+
+    .incorrect {
+      border: 2px solid var(--incorrect-color) !important;
+      background-color: #fef2f2 !important;
+      color: #b91c1c !important;
+    }
+
+    /* Tarea 2: Drag and Drop */
+    .drag-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #fff1f2;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px dashed var(--border-color);
+      margin-bottom: 20px;
+      min-height: 50px;
+    }
+
+    .drag-item {
+      background: var(--primary-color);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: grab;
+      font-weight: 600;
+      user-select: none;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .drag-item:active {
+      cursor: grabbing;
+    }
+
+    .drag-item.selected {
+      outline: 3px solid #fbbf24;
+      transform: scale(1.05);
+    }
+
+    .drop-zone {
+      display: inline-block;
+      min-width: 180px;
+      min-height: 38px;
+      border: 2px dashed #94a3b8;
+      border-radius: 6px;
+      background: #ffffff;
+      vertical-align: middle;
+      padding: 2px 6px;
+      transition: background-color 0.2s;
+    }
+
+    .drop-zone.hover {
+      background-color: #fecdd3;
+      border-color: var(--primary-color);
+    }
+
+    .drop-zone .drag-item {
+      margin: 0;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Tarea 3: Tabla */
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ffe4e6;
+      color: #881337;
+      font-weight: 700;
+    }
+
+    td input[type="text"] {
+      width: 100%;
+      min-width: 110px;
+      box-sizing: border-box;
+    }
+
+    /* Controles y Botones */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-reset {
+      background-color: #64748b;
+    }
+
+    .btn-reset:hover {
+      background-color: #475569;
+    }
+
+    .result-box {
+      font-weight: bold;
+      font-size: 1.05rem;
+    }
+
+    .result-success {
+      color: var(--correct-color);
+    }
+
+    .result-partial {
+      color: var(--incorrect-color);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Español Lengua Extranjera (ELE) — Nivel A1</h1>
+  <div class="subtitle">Tema: Países, Nacionalidades e Idiomas</div>
+
+  <!-- ================= TAREA 1 ================= -->
+  <h2>Tarea 1. Transformar las oraciones</h2>
+  <div class="instructions">Escribe la oración transformada en el espacio correspondiente.</div>
+
+  <!-- Parte 1 -->
+  <h3>Parte 1</h3>
+  <div class="example-box">Ejemplo: él es italiano ➔ él es de Italia</div>
+
+  <div id="t1-p1-container">
+    <div class="item-card">
+      <span>1. Yo soy argentina ➔</span>
+      <input type="text" data-answer="yo soy de argentina" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>2. Vos sos alemán ➔</span>
+      <input type="text" data-answer="vos sos de alemania" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>3. Ellos son belgas ➔</span>
+      <input type="text" data-answer="ellos son de bélgica" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>4. Nosotras somos mexicanas ➔</span>
+      <input type="text" data-answer="nosotras somos de méxico" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>5. Ustedes son uruguayos ➔</span>
+      <input type="text" data-answer="ustedes son de uruguay" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>6. Ella es rusa ➔</span>
+      <input type="text" data-answer="ella es de rusia" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>7. Yo soy español ➔</span>
+      <input type="text" data-answer="yo soy de españa" placeholder="Escribe la oración completa...">
+    </div>
+  </div>
+
+  <!-- Parte 2 -->
+  <h3>Parte 2</h3>
+  <div class="example-box">Ejemplo: él es de Italia ➔ él es italiano</div>
+
+  <div id="t1-p2-container">
+    <div class="item-card">
+      <span>1. ella es de Colombia ➔</span>
+      <input type="text" data-answer="ella es colombiana" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>2. él es de Brasil ➔</span>
+      <input type="text" data-answer="él es brasileño|el es brasileño" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>3. nosotros somos de Chile ➔</span>
+      <input type="text" data-answer="nosotros somos chilenos" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>4. ellas son de Francia ➔</span>
+      <input type="text" data-answer="ellas son francesas" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>5. él es de España ➔</span>
+      <input type="text" data-answer="él es español|el es español" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>6. yo soy de los Estados Unidos ➔</span>
+      <input type="text" data-answer="yo soy estadounidense" placeholder="Escribe la oración completa...">
+    </div>
+    <div class="item-card">
+      <span>7. vos sos de Marruecos ➔</span>
+      <input type="text" data-answer="vos sos marroquí|vos sos marroqui" placeholder="Escribe la oración completa...">
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="btn-group">
+      <button class="btn" onclick="checkTask1()">Comprobar Tarea 1</button>
+      <button class="btn btn-reset" onclick="resetTask1()">Reiniciar Tarea 1</button>
+    </div>
+    <div id="result-task1" class="result-box"></div>
+  </div>
+
+
+  <!-- ================= TAREA 2 ================= -->
+  <h2>Tarea 2. Unir dos partes de las oraciones</h2>
+  <div class="instructions">Arrastra el rectángulo con la segunda parte hasta su casilla correspondiente (o haz clic en un rectángulo y luego en la casilla de destino).</div>
+  
+  <div class="example-box">Ejemplo: El oso panda — <span style="background:var(--primary-color); color:white; padding:2px 8px; border-radius:4px;">es chino</span></div>
+
+  <!-- Banco de fichas para arrastrar -->
+  <div class="drag-bank" id="drag-bank">
+    <!-- Se generarán por JavaScript en orden aleatorio -->
+  </div>
+
+  <div id="t2-container">
+    <div class="item-card">
+      <span>1. El tango — </span>
+      <div class="drop-zone" data-answer="es argentino"></div>
+    </div>
+    <div class="item-card">
+      <span>2. La samba — </span>
+      <div class="drop-zone" data-answer="es brasileña"></div>
+    </div>
+    <div class="item-card">
+      <span>3. Los sushi — </span>
+      <div class="drop-zone" data-answer="son japoneses"></div>
+    </div>
+    <div class="item-card">
+      <span>4. El béisbol — </span>
+      <div class="drop-zone" data-answer="es estadounidense"></div>
+    </div>
+    <div class="item-card">
+      <span>5. La matrióshka — </span>
+      <div class="drop-zone" data-answer="es rusa"></div>
+    </div>
+    <div class="item-card">
+      <span>6. El candombe — </span>
+      <div class="drop-zone" data-answer="es uruguayo"></div>
+    </div>
+    <div class="item-card">
+      <span>7. Las mandarinas — </span>
+      <div class="drop-zone" data-answer="son marroquíes"></div>
+    </div>
+    <div class="item-card">
+      <span>8. El flamenco — </span>
+      <div class="drop-zone" data-answer="es español"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="btn-group">
+      <button class="btn" onclick="checkTask2()">Comprobar Tarea 2</button>
+      <button class="btn btn-reset" onclick="resetTask2()">Reiniciar Tarea 2</button>
+    </div>
+    <div id="result-task2" class="result-box"></div>
+  </div>
+
+
+  <!-- ================= TAREA 3 ================= -->
+  <h2>Tarea 3. Tabla interactiva</h2>
+  <div class="instructions">Completa las casillas vacías de la tabla con el país, gentilicio (masculino/femenino) o idioma correspondiente:</div>
+
+  <div class="table-responsive">
+    <table id="t3-table">
+      <thead>
+        <tr>
+          <th>País</th>
+          <th>Masculino (él)</th>
+          <th>Femenino (ella)</th>
+          <th>Idioma</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 1 -->
+        <tr>
+          <td>Argentina</td>
+          <td><input type="text" data-answer="argentino"></td>
+          <td><input type="text" data-answer="argentina"></td>
+          <td>español</td>
+        </tr>
+        <!-- 2 -->
+        <tr>
+          <td>México</td>
+          <td><input type="text" data-answer="mexicano"></td>
+          <td><input type="text" data-answer="mexicana"></td>
+          <td>español</td>
+        </tr>
+        <!-- 3 -->
+        <tr>
+          <td><input type="text" data-answer="francia"></td>
+          <td><input type="text" data-answer="francés|frances"></td>
+          <td><input type="text" data-answer="francesa"></td>
+          <td><input type="text" data-answer="francés|frances"></td>
+        </tr>
+        <!-- 4 -->
+        <tr>
+          <td><input type="text" data-answer="marruecos"></td>
+          <td>marroquí</td>
+          <td><input type="text" data-answer="marroquí|marroqui"></td>
+          <td>árabe</td>
+        </tr>
+        <!-- 5 -->
+        <tr>
+          <td>Brasil</td>
+          <td><input type="text" data-answer="brasileño"></td>
+          <td><input type="text" data-answer="brasileña"></td>
+          <td>portugués</td>
+        </tr>
+        <!-- 6 -->
+        <tr>
+          <td><input type="text" data-answer="uruguay"></td>
+          <td><input type="text" data-answer="uruguayo"></td>
+          <td>uruguaya</td>
+          <td><input type="text" data-answer="español"></td>
+        </tr>
+        <!-- 7 -->
+        <tr>
+          <td>Japón</td>
+          <td><input type="text" data-answer="japonés|japones"></td>
+          <td><input type="text" data-answer="japonesa"></td>
+          <td><input type="text" data-answer="japonés|japones"></td>
+        </tr>
+        <!-- 8 -->
+        <tr>
+          <td><input type="text" data-answer="rusia"></td>
+          <td>ruso</td>
+          <td><input type="text" data-answer="rusa"></td>
+          <td><input type="text" data-answer="ruso"></td>
+        </tr>
+        <!-- 9 -->
+        <tr>
+          <td><input type="text" data-answer="alemania"></td>
+          <td>alemán</td>
+          <td><input type="text" data-answer="alemana"></td>
+          <td>alemán</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="controls">
+    <div class="btn-group">
+      <button class="btn" onclick="checkTask3()">Comprobar Tarea 3</button>
+      <button class="btn btn-reset" onclick="resetTask3()">Reiniciar Tarea 3</button>
+    </div>
+    <div id="result-task3" class="result-box"></div>
+  </div>
+
+</div>
+
+<script>
+  // Normalizador de texto (elimina puntos finales, espacios extra y pasa a minúsculas)
+  function normalizeText(str) {
+    return str.trim().toLowerCase().replace(/\.$/, '');
+  }
+
+  /* ================= JAVASCRIPT TAREA 1 ================= */
+  function checkTask1() {
+    const inputs1 = document.querySelectorAll('#t1-p1-container input');
+    const inputs2 = document.querySelectorAll('#t1-p2-container input');
+    const allInputs = [...inputs1, ...inputs2];
+    
+    let correct = 0;
+
+    allInputs.forEach(input => {
+      input.classList.remove('correct', 'incorrect');
+      const userVal = normalizeText(input.value);
+      const validAnswers = input.getAttribute('data-answer').split('|').map(normalizeText);
+
+      if (userVal !== '' && validAnswers.includes(userVal)) {
+        input.classList.add('correct');
+        correct++;
+      } else {
+        input.classList.add('incorrect');
+      }
+    });
+
+    const resultDiv = document.getElementById('result-task1');
+    resultDiv.textContent = `Resultado Tarea 1: ${correct} de ${allInputs.length} correcto(s).`;
+    resultDiv.className = `result-box ${correct === allInputs.length ? 'result-success' : 'result-partial'}`;
+  }
+
+  function resetTask1() {
+    const inputs = document.querySelectorAll('#t1-p1-container input, #t1-p2-container input');
+    inputs.forEach(input => {
+      input.value = '';
+      input.classList.remove('correct', 'incorrect');
+    });
+    const resultDiv = document.getElementById('result-task1');
+    resultDiv.textContent = '';
+    resultDiv.className = 'result-box';
+  }
+
+
+  /* ================= JAVASCRIPT TAREA 2 ================= */
+  const t2Data = [
+    "es argentino", "es brasileña", "son japoneses", "es estadounidense",
+    "es rusa", "es uruguayo", "son marroquíes", "es español"
+  ];
+
+  let selectedTile = null;
+
+  function initTask2() {
+    const bank = document.getElementById('drag-bank');
+    bank.innerHTML = '';
+    
+    // Mezclar las opciones
+    const shuffled = [...t2Data].sort(() => Math.random() - 0.5);
+
+    shuffled.forEach((text, idx) => {
+      const tile = document.createElement('div');
+      tile.className = 'drag-item';
+      tile.textContent = text;
+      tile.id = `tile-${idx}`;
+      tile.setAttribute('draggable', 'true');
+      
+      // Eventos Drag and Drop
+      tile.addEventListener('dragstart', handleDragStart);
+      
+      // Evento Click (soporte para móviles)
+      tile.addEventListener('click', handleTileClick);
+
+      bank.appendChild(tile);
+    });
+
+    // Configurar drop zones
+    const zones = document.querySelectorAll('#t2-container .drop-zone');
+    zones.forEach(zone => {
+      zone.innerHTML = '';
+      zone.classList.remove('correct', 'incorrect');
+      zone.addEventListener('dragover', handleDragOver);
+      zone.addEventListener('dragleave', handleDragLeave);
+      zone.addEventListener('drop', handleDrop);
+      zone.addEventListener('click', handleZoneClick);
+    });
+
+    // Permitir devolver items al banco
+    bank.addEventListener('dragover', handleDragOver);
+    bank.addEventListener('drop', handleDropToBank);
+    bank.addEventListener('click', handleBankClick);
+  }
+
+  function handleDragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    if (e.currentTarget.classList.contains('drop-zone')) {
+      e.currentTarget.classList.add('hover');
+    }
+  }
+
+  function handleDragLeave(e) {
+    if (e.currentTarget.classList.contains('drop-zone')) {
+      e.currentTarget.classList.remove('hover');
+    }
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    const zone = e.currentTarget;
+    zone.classList.remove('hover');
+    const tileId = e.dataTransfer.getData('text/plain');
+    const tile = document.getElementById(tileId);
+
+    if (tile) {
+      if (zone.children.length > 0) {
+        document.getElementById('drag-bank').appendChild(zone.children[0]);
+      }
+      zone.appendChild(tile);
+    }
+  }
+
+  function handleDropToBank(e) {
+    e.preventDefault();
+    const tileId = e.dataTransfer.getData('text/plain');
+    const tile = document.getElementById(tileId);
+    if (tile) {
+      document.getElementById('drag-bank').appendChild(tile);
+    }
+  }
+
+  // Soporte Selección por Click
+  function handleTileClick(e) {
+    e.stopPropagation();
+    if (selectedTile) {
+      selectedTile.classList.remove('selected');
+    }
+    if (selectedTile === e.currentTarget) {
+      selectedTile = null;
+    } else {
+      selectedTile = e.currentTarget;
+      selectedTile.classList.add('selected');
+    }
+  }
+
+  function handleZoneClick(e) {
+    if (selectedTile) {
+      const zone = e.currentTarget;
+      if (zone.children.length > 0) {
+        document.getElementById('drag-bank').appendChild(zone.children[0]);
+      }
+      zone.appendChild(selectedTile);
+      selectedTile.classList.remove('selected');
+      selectedTile = null;
+    }
+  }
+
+  function handleBankClick(e) {
+    if (selectedTile && e.target.id === 'drag-bank') {
+      document.getElementById('drag-bank').appendChild(selectedTile);
+      selectedTile.classList.remove('selected');
+      selectedTile = null;
+    }
+  }
+
+  function checkTask2() {
+    const zones = document.querySelectorAll('#t2-container .drop-zone');
+    let correct = 0;
+
+    zones.forEach(zone => {
+      zone.classList.remove('correct', 'incorrect');
+      const expected = zone.getAttribute('data-answer');
+      const currentTile = zone.querySelector('.drag-item');
+
+      if (currentTile && currentTile.textContent.trim() === expected) {
+        zone.classList.add('correct');
+        correct++;
+      } else {
+        zone.classList.add('incorrect');
+      }
+    });
+
+    const resultDiv = document.getElementById('result-task2');
+    resultDiv.textContent = `Resultado Tarea 2: ${correct} de ${zones.length} correcto(s).`;
+    resultDiv.className = `result-box ${correct === zones.length ? 'result-success' : 'result-partial'}`;
+  }
+
+  function resetTask2() {
+    initTask2();
+    const resultDiv = document.getElementById('result-task2');
+    resultDiv.textContent = '';
+    resultDiv.className = 'result-box';
+  }
+
+
+  /* ================= JAVASCRIPT TAREA 3 ================= */
+  function checkTask3() {
+    const inputs = document.querySelectorAll('#t3-table input');
+    let correct = 0;
+
+    inputs.forEach(input => {
+      input.classList.remove('correct', 'incorrect');
+      const userVal = normalizeText(input.value);
+      const validAnswers = input.getAttribute('data-answer').split('|').map(normalizeText);
+
+      if (userVal !== '' && validAnswers.includes(userVal)) {
+        input.classList.add('correct');
+        correct++;
+      } else {
+        input.classList.add('incorrect');
+      }
+    });
+
+    const resultDiv = document.getElementById('result-task3');
+    resultDiv.textContent = `Resultado Tarea 3: ${correct} de ${inputs.length} correcto(s).`;
+    resultDiv.className = `result-box ${correct === inputs.length ? 'result-success' : 'result-partial'}`;
+  }
+
+  function resetTask3() {
+    const inputs = document.querySelectorAll('#t3-table input');
+    inputs.forEach(input => {
+      input.value = '';
+      input.classList.remove('correct', 'incorrect');
+    });
+    const resultDiv = document.getElementById('result-task3');
+    resultDiv.textContent = '';
+    resultDiv.className = 'result-box';
+  }
+
+  // Inicializar Tarea 2 al cargar la página
+  window.onload = function() {
+    initTask2();
+  };
+</script>
+
+</body>
+</html>
