@@ -215,6 +215,29 @@
       font-weight: bold;
       font-size: 1.05rem;
     }
+
+    /* Tarjeta de Puntuación Total */
+    .total-score-card {
+      margin-top: 40px;
+      padding: 25px;
+      background: #e0f2fe;
+      border: 2px solid #0284c7;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .total-score-card h2 {
+      margin-top: 0;
+      color: #0369a1;
+      border: none;
+      font-size: 1.4rem;
+    }
+
+    #total-result {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -425,6 +448,15 @@
     </div>
   </div>
 
+
+  <!-- ================= PUNTUACIÓN TOTAL ================= -->
+  <div class="total-score-card">
+    <h2>Puntuación Total de la Página</h2>
+    <p style="margin: 5px 0 15px 0; color: #334155;">Haz clic en el botón para calcular tu nota final sumando todas las actividades (Máximo: 15 puntos).</p>
+    <button class="btn" style="background-color: #0284c7; padding: 12px 28px; font-size: 1.05rem;" onclick="checkTotalScore()">Calcular Nota Final</button>
+    <div id="total-result"></div>
+  </div>
+
 </div>
 
 <script>
@@ -449,6 +481,7 @@
     const res = document.getElementById('result-act1');
     res.textContent = `Puntuación Actividad 1: ${correct} / 3 puntos`;
     res.className = `result-box ${correct === 3 ? 'highlight-correct' : 'highlight-incorrect'}`;
+    return correct;
   }
 
   function resetAct1() {
@@ -471,7 +504,6 @@
         if (r.checked) selectedVal = r.value;
       });
 
-      // Limpiar estilos previos en labels
       radios.forEach(r => r.closest('.radio-label').style.color = "");
 
       if (selectedVal === expected) {
@@ -488,6 +520,7 @@
     const res = document.getElementById('result-act2');
     res.textContent = `Puntuación Actividad 2: ${correct} / 4 puntos`;
     res.className = `result-box ${correct === 4 ? 'highlight-correct' : 'highlight-incorrect'}`;
+    return correct;
   }
 
   function resetAct2() {
@@ -526,6 +559,7 @@
     const res = document.getElementById('result-act3');
     res.textContent = `Puntuación Actividad 3: ${correct} / 4 puntos`;
     res.className = `result-box ${correct === 4 ? 'highlight-correct' : 'highlight-incorrect'}`;
+    return correct;
   }
 
   function resetAct3() {
@@ -555,6 +589,7 @@
     const res = document.getElementById('result-act4');
     res.textContent = `Puntuación Actividad 4: ${correct} / 4 puntos`;
     res.className = `result-box ${correct === 4 ? 'highlight-correct' : 'highlight-incorrect'}`;
+    return correct;
   }
 
   function resetAct4() {
@@ -563,6 +598,26 @@
       input.classList.remove('correct', 'incorrect');
     });
     document.getElementById('result-act4').textContent = "";
+  }
+
+  // --- Puntuación Total ---
+  function checkTotalScore() {
+    const c1 = checkAct1();
+    const c2 = checkAct2();
+    const c3 = checkAct3();
+    const c4 = checkAct4();
+    const total = c1 + c2 + c3 + c4;
+
+    const totalRes = document.getElementById('total-result');
+    totalRes.textContent = `¡Calificación Final: ${total} de 15 puntos!`;
+    
+    if (total === 15) {
+      totalRes.style.color = "var(--correct-color)";
+    } else if (total >= 10) {
+      totalRes.style.color = "#d97706"; // Naranja / Bueno
+    } else {
+      totalRes.style.color = "var(--incorrect-color)";
+    }
   }
 </script>
 
