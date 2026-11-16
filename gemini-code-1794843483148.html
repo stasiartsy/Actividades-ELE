@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diferencias del español: Comida</title>
+  <style>
+    :root {
+      --primary: #0066cc;
+      --primary-hover: #0052a3;
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --text: #2c3e50;
+      --border: #dce1e5;
+      --correct-bg: #e8f8f0;
+      --correct-border: #27ae60;
+      --incorrect-bg: #fdedec;
+      --incorrect-border: #c0392b;
+      --disabled-bg: #eef2f5;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+
+    .instructions {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    /* Video responsivo */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Tabla responsiva */
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #f0f4f8;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    td.emoji-cell {
+      font-size: 2rem;
+      background-color: #fafbfc;
+      width: 70px;
+    }
+
+    td.empty-cell {
+      background-color: var(--disabled-bg);
+      color: #8c9ba5;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      max-width: 130px;
+      padding: 7px 8px;
+      font-size: 0.95rem;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    input.correct {
+      border-color: var(--correct-border);
+      background-color: var(--correct-bg);
+      color: #1e8449;
+      font-weight: 600;
+    }
+
+    input.incorrect {
+      border-color: var(--incorrect-border);
+      background-color: var(--incorrect-bg);
+      color: #922b21;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 11px 22px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .feedback {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .feedback.ok { color: #27ae60; }
+    .feedback.warn { color: #c0392b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Variedades del español: La comida</h1>
+    <p class="instructions">Mirá el video y completá la tabla interactiva.</p>
+
+    <div class="video-wrapper">
+      <iframe width="1351" height="480" src="https://www.youtube.com/embed/fQ7cWJApFHc" title="Diferencias del español. Comida. SergiMartinSpanish" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div class="table-container">
+      <table id="vocab-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Argentina 🇦🇷</th>
+            <th>España 🇪🇸</th>
+            <th>Colombia 🇨🇴</th>
+            <th>Chile 🇨🇱</th>
+            <th>Venezuela 🇻🇪</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Fila 1: Frutilla -->
+          <tr>
+            <td class="emoji-cell" aria-label="Frutilla">🍓</td>
+            <td><input type="text" data-answer="frutilla" autocomplete="off"></td>
+            <td><input type="text" data-answer="fresa" autocomplete="off"></td>
+            <td><input type="text" data-answer="fresa" autocomplete="off"></td>
+            <td><input type="text" data-answer="frutilla" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+          </tr>
+          <!-- Fila 2: Palta -->
+          <tr>
+            <td class="emoji-cell" aria-label="Palta">🥑</td>
+            <td><input type="text" data-answer="palta" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+            <td><input type="text" data-answer="aguacate" autocomplete="off"></td>
+          </tr>
+          <!-- Fila 3: Banana -->
+          <tr>
+            <td class="emoji-cell" aria-label="Banana">🍌</td>
+            <td><input type="text" data-answer="banana" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+            <td><input type="text" data-answer="banano" autocomplete="off"></td>
+            <td><input type="text" data-answer="plátano" autocomplete="off"></td>
+            <td><input type="text" data-answer="cambur" autocomplete="off"></td>
+          </tr>
+          <!-- Fila 4: Ananá -->
+          <tr>
+            <td class="emoji-cell" aria-label="Ananá">🍍</td>
+            <td><input type="text" data-answer="ananá" autocomplete="off"></td>
+            <td><input type="text" data-answer="piña" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+          </tr>
+          <!-- Fila 5: Papa -->
+          <tr>
+            <td class="emoji-cell" aria-label="Papa">🥔</td>
+            <td><input type="text" data-answer="papa" autocomplete="off"></td>
+            <td><input type="text" data-answer="patata" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+            <td class="empty-cell">X</td>
+          </tr>
+          <!-- Fila 6: Vaca -->
+          <tr>
+            <td class="emoji-cell" aria-label="Vaca">🐄</td>
+            <td><input type="text" data-answer="carne" autocomplete="off"></td>
+            <td><input type="text" data-answer="ternera" autocomplete="off"></td>
+            <td><input type="text" data-answer="ternera" autocomplete="off"></td>
+            <td><input type="text" data-answer="carne" autocomplete="off"></td>
+            <td><input type="text" data-answer="ternera" autocomplete="off"></td>
+          </tr>
+          <!-- Fila 7: Cerdo -->
+          <tr>
+            <td class="emoji-cell" aria-label="Cerdo">🐖</td>
+            <td><input type="text" data-answer="cerdo" autocomplete="off"></td>
+            <td class="empty-cell">X</td>
+            <td><input type="text" data-answer="cerdo" autocomplete="off"></td>
+            <td><input type="text" data-answer="chancho" autocomplete="off"></td>
+            <td><input type="text" data-answer="cochino" autocomplete="off"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn" onclick="verificar()">Verificar respuestas</button>
+      <button type="button" class="btn btn-secondary" onclick="reiniciar()">Reiniciar</button>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <script>
+    function normalizar(texto) {
+      return texto.trim().toLowerCase();
+    }
+
+    function verificar() {
+      const inputs = document.querySelectorAll('#vocab-table input[type="text"]');
+      let correctas = 0;
+
+      inputs.forEach(input => {
+        const valorUsuario = normalizar(input.value);
+        const respuestaCorrecta = normalizar(input.dataset.answer);
+
+        input.classList.remove('correct', 'incorrect');
+
+        if (valorUsuario === respuestaCorrecta) {
+          input.classList.add('correct');
+          correctas++;
+        } else {
+          input.classList.add('incorrect');
+        }
+      });
+
+      const feedback = document.getElementById('feedback');
+      if (correctas === inputs.length) {
+        feedback.textContent = `¡Excelente! Completaste todas las casillas correctamente (${correctas}/${inputs.length}).`;
+        feedback.className = 'feedback ok';
+      } else {
+        feedback.textContent = `Tenés ${correctas} de ${inputs.length} respuestas correctas. Revisá las casillas marcadas en rojo.`;
+        feedback.className = 'feedback warn';
+      }
+    }
+
+    function reiniciar() {
+      const inputs = document.querySelectorAll('#vocab-table input[type="text"]');
+      inputs.forEach(input => {
+        input.value = '';
+        input.classList.remove('correct', 'incorrect');
+      });
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    }
+  </script>
+</body>
+</html>
